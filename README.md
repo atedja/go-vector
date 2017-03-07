@@ -1,6 +1,6 @@
 # Vector
 
-Simple Vector library.
+Simple Vector library that supports marshaling.
 
 ### Quick Example
 
@@ -40,6 +40,10 @@ func main() {
     v2 := vector.NewWithValues([]float64{2.0, -1.0, 4.0})
     cross, _ := vector.Cross(v1, v2)
     dot, _ := vector.Dot(v1, v2)
+
+#### And more!
+
+`Add`, `Subtract`, `Scale`, `Resize`, `Zero`, `Magnitude`, `Unit`
 
 #### Marshal and Unmarshal
 

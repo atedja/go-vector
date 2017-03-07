@@ -131,6 +131,7 @@ func TestVectorUnit(t *testing.T) {
 	unit := v.Unit()
 	assert.InEpsilon(0.6, unit.Elements[0], epsilon)
 	assert.InEpsilon(0.8, unit.Elements[1], epsilon)
+	assert.Equal(1.0, unit.Magnitude())
 }
 
 func TestVectorDim(t *testing.T) {
