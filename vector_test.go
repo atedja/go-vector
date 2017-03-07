@@ -102,16 +102,16 @@ func TestVectorResize(t *testing.T) {
 
 	v.Resize(8)
 	assert.Equal(len(v.Elements), 8)
-	assert.Equal(v.Elements[0], 0.0)
-	assert.Equal(v.Elements[1], 1.0)
-	assert.Equal(v.Elements[2], 0.0)
-	assert.Equal(v.Elements[7], 0.0)
+	assert.Equal(0.0, v.Elements[0])
+	assert.Equal(1.0, v.Elements[1])
+	assert.Equal(0.0, v.Elements[2])
+	assert.Equal(0.0, v.Elements[7])
 }
 
 func TestVectorMagnitude(t *testing.T) {
 	assert := assert.New(t)
 	v := NewWithValues([]float64{3.0, 4.0})
-	assert.Equal(v.Magnitude(), 5.0)
+	assert.Equal(5.0, v.Magnitude())
 }
 
 func TestVectorUnit(t *testing.T) {
@@ -119,12 +119,22 @@ func TestVectorUnit(t *testing.T) {
 	epsilon := math.Nextafter(1, 2) - 1
 	v := NewWithValues([]float64{3.0, 4.0})
 	unit := v.Unit()
-	assert.InEpsilon(unit.Elements[0], 0.6, epsilon)
-	assert.InEpsilon(unit.Elements[1], 0.8, epsilon)
+	assert.InEpsilon(0.6, unit.Elements[0], epsilon)
+	assert.InEpsilon(0.8, unit.Elements[1], epsilon)
 }
 
 func TestVectorDim(t *testing.T) {
 	assert := assert.New(t)
 	v := NewWithValues([]float64{0.0, 1.0, 2.0, 1.0})
 	assert.Equal(4, v.Dim())
+}
+
+func TestVectorZero(t *testing.T) {
+	assert := assert.New(t)
+	v := NewWithValues([]float64{0.0, 1.0, 2.0, 1.0})
+	v.Zero()
+	assert.Equal(0.0, v.Elements[0])
+	assert.Equal(0.0, v.Elements[1])
+	assert.Equal(0.0, v.Elements[2])
+	assert.Equal(0.0, v.Elements[3])
 }

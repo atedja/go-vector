@@ -116,3 +116,10 @@ func (self *Vector) Unit() *Vector {
 func (self *Vector) Dim() int {
 	return len(self.Elements)
 }
+
+// Zeroes this vector
+func (self *Vector) Zero() {
+	for i, _ := range self.Elements {
+		self.Elements[i] = 0.0
+	}
+}
