@@ -95,3 +95,14 @@ func TestCross(t *testing.T) {
 	_, err = Cross(v3, v4)
 	assert.NotNil(err)
 }
+
+func TestHadamard(t *testing.T) {
+	assert := assert.New(t)
+	v1 := NewWithValues([]float64{1.0, 1.0, 2.0})
+	v2 := NewWithValues([]float64{0.5, 3.0, 4.0})
+	result, err := Hadamard(v1, v2)
+	assert.Nil(err)
+	assert.Equal(0.5, result.Elements[0])
+	assert.Equal(3.0, result.Elements[1])
+	assert.Equal(8.0, result.Elements[2])
+}

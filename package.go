@@ -74,3 +74,16 @@ func Cross(v1, v2 *Vector) (*Vector, error) {
 	result.Cross(v2)
 	return result, nil
 }
+
+func Hadamard(v1, v2 *Vector) (*Vector, error) {
+	if v1.Dim() != v2.Dim() {
+		return nil, ErrVectorInvalidDimension
+	}
+
+	length := v1.Dim()
+	result := New(length)
+	for i := 0; i < length; i++ {
+		result.Elements[i] = v1.Elements[i] * v2.Elements[i]
+	}
+	return result, nil
+}
