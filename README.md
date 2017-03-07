@@ -43,6 +43,5 @@ func main() {
 
 #### Marshal and Unmarshal
 
-Vector supports JSON/Text marshal and unmarshal. Marshalling a Vector returns a JSON array as a string, e.g. `[1,2,3]`.
-Marshalling a Vector as Text returns its CSV format, e.g. `1,2,3\n` (with the CRLF character).
-Binary marshal/unmarshal shall be supported in future version.
+Vector implements `encoding.BinaryMarshaler`, `encoding.BinaryUnmarshaler`, `encoding.TextMarshaler`, `encoding.TextUnmarshaler`,
+and also `json.Marshaler` and `json.Unmarshaler` for all your marshaling needs.
