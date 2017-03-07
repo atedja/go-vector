@@ -44,4 +44,4 @@ func main() {
 #### Marshal and Unmarshal
 
 Vector implements `encoding.BinaryMarshaler`, `encoding.BinaryUnmarshaler`, `encoding.TextMarshaler`, `encoding.TextUnmarshaler`,
-and also `json.Marshaler` and `json.Unmarshaler` for all your marshaling needs.
+and also `json.Marshaler` and `json.Unmarshaler` for all your marshaling needs. Text marshaling is using the CSV format.
