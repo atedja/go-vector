@@ -34,7 +34,7 @@ func (self *Vector) Set(values []float64) {
 	copy(self.Elements, values)
 }
 
-// Sums this vector with another.
+// Adds this vector with another.
 func (self *Vector) Add(other *Vector) {
 	length := min(len(self.Elements), len(other.Elements))
 	for i := 0; i < length; i++ {
@@ -126,5 +126,12 @@ func (self *Vector) Dim() int {
 func (self *Vector) Zero() {
 	for i, _ := range self.Elements {
 		self.Elements[i] = 0.0
+	}
+}
+
+// Iterates through the elements of this vector and applies a custom function
+func (self *Vector) ApplyFn(applyFn func(int, float64) float64) {
+	for i, e := range self.Elements {
+		self.Elements[i] = applyFn(i, e)
 	}
 }
