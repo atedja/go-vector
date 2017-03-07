@@ -1,6 +1,6 @@
 # Vector
 
-Simple Vector library that supports marshaling.
+Simple N-dimensional Vector math library. Supports JSON/Text/Binary marshaling.
 
 ### Quick Example
 
