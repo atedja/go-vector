@@ -73,6 +73,7 @@ func (self *Vector) Dot(other *Vector) (float64, error) {
 }
 
 // Performs cross product with another vector.
+// This overwrites this vector to contain the resulting vector. Use `vector.Cross` if a new vector is desired.
 // Vector dimensionality has to be 3.
 func (self *Vector) Cross(other *Vector) error {
 	if self.Dim() != 3 || other.Dim() != 3 {
