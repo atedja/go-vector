@@ -44,3 +44,15 @@ func TestUnmarshalText(t *testing.T) {
 	assert.Equal(5.0, v1.Elements[5])
 	assert.Equal(-29.0, v1.Elements[6])
 }
+
+func TestMarshalUnmarshalText(t *testing.T) {
+	assert := assert.New(t)
+	v1 := NewWithValues([]float64{-1.0, 0.0, 2.0, 3.14})
+	result, err := v1.MarshalText()
+	assert.Nil(err)
+	assert.Equal("-1,0,2,3.14\n", string(result))
+
+	v2 := New(1)
+	v2.UnmarshalText(result)
+	assert.Equal(v1, v2)
+}
