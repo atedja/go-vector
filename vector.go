@@ -29,6 +29,11 @@ func (self *Vector) Clone() *Vector {
 	return NewWithValues(self.Elements)
 }
 
+// Sets the values of this vector.
+func (self *Vector) Set(values []float64) {
+	copy(self.Elements, values)
+}
+
 // Sums this vector with another.
 func (self *Vector) Add(other *Vector) {
 	length := min(len(self.Elements), len(other.Elements))

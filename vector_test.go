@@ -35,6 +35,16 @@ func TestClone(t *testing.T) {
 	assert.Equal(-1.0, v2.Elements[2])
 }
 
+func TestSet(t *testing.T) {
+	assert := assert.New(t)
+	v1 := New(4)
+	v1.Set([]float64{10.0, 9.9, 9.8, 9.7})
+	assert.Equal(10.0, v1.Elements[0])
+	assert.Equal(9.9, v1.Elements[1])
+	assert.Equal(9.8, v1.Elements[2])
+	assert.Equal(9.7, v1.Elements[3])
+}
+
 func TestVectorAdd(t *testing.T) {
 	assert := assert.New(t)
 	v1 := NewWithValues([]float64{0.0, 1.0, 2.0, 1.0})
