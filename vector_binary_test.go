@@ -17,7 +17,6 @@ limitations under the License.
 package vector
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -28,8 +27,6 @@ func TestMarshalUnmarshalBinary(t *testing.T) {
 	v1 := NewWithValues([]float64{-1.0, 0.0, 2.0, 3.14})
 	result, err := v1.MarshalBinary()
 	assert.Nil(err)
-
-	fmt.Println(result)
 
 	v2 := New(1)
 	v2.UnmarshalBinary(result)
