@@ -51,7 +51,7 @@ func (self *Vector) UnmarshalBinary(data []byte) error {
 		return err
 	}
 
-	self.Elements = make([]float64, length)
+	var tempData = make([]float64, length)
 	var val float64
 	var i uint64
 	for i = 0; i < length; i++ {
@@ -59,8 +59,10 @@ func (self *Vector) UnmarshalBinary(data []byte) error {
 		if err != nil {
 			return err
 		}
-		self.Elements[i] = val
+		tempData[i] = val
 	}
+
+	self.Elements = tempData
 
 	return nil
 }
