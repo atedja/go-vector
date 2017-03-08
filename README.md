@@ -41,11 +41,12 @@ func main() {
     cross, _ := vector.Cross(v1, v2)
     dot, _ := vector.Dot(v1, v2)
 
-In general, all functions under `vector` package is designed to always return the result without modifying the existing vectors.
+In general, all functions under `vector` package are designed to always return a new result without modifying the vectors
+in the arguments.
 
 #### And more!
 
-`Add`, `Subtract`, `Scale`, `Resize`, `Zero`, `Magnitude`, `Unit`
+`Add`, `Subtract`, `Scale`, `Resize`, `Zero`, `Magnitude`, `Unit`, `Hadamard`
 
 #### Marshal and Unmarshal
 
