@@ -43,6 +43,12 @@ func TestSet(t *testing.T) {
 	assert.Equal(9.9, v1.Elements[1])
 	assert.Equal(9.8, v1.Elements[2])
 	assert.Equal(9.7, v1.Elements[3])
+
+	v1.Set([]float64{1.0, 2.0, 3.0, 4.0})
+	assert.Equal(1.0, v1.Elements[0])
+	assert.Equal(2.0, v1.Elements[1])
+	assert.Equal(3.0, v1.Elements[2])
+	assert.Equal(4.0, v1.Elements[3])
 }
 
 func TestVectorAdd(t *testing.T) {
