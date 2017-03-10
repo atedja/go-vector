@@ -23,21 +23,23 @@ import (
 )
 
 func TestNew(t *testing.T) {
+	assert := assert.New(t)
 	v := New(4)
-	v.Elements[0] = 2.9
-	v.Elements[1] = 3.1
-	v.Elements[2] = 3.2
-	assert.Equal(t, v.Elements[0], 2.9)
-	assert.Equal(t, v.Elements[1], 3.1)
-	assert.Equal(t, v.Elements[2], 3.2)
-	assert.Equal(t, v.Elements[3], 0.0)
+	v[0] = 2.9
+	v[1] = 3.1
+	v[2] = 3.2
+	assert.Equal(v[0], 2.9)
+	assert.Equal(v[1], 3.1)
+	assert.Equal(v[2], 3.2)
+	assert.Equal(v[3], 0.0)
 }
 
 func TestNewWithValues(t *testing.T) {
+	assert := assert.New(t)
 	v := NewWithValues([]float64{0.0, 1.0, 2.0})
-	assert.Equal(t, v.Elements[0], 0.0)
-	assert.Equal(t, v.Elements[1], 1.0)
-	assert.Equal(t, v.Elements[2], 2.0)
+	assert.Equal(v[0], 0.0)
+	assert.Equal(v[1], 1.0)
+	assert.Equal(v[2], 2.0)
 }
 
 func TestAdd(t *testing.T) {
@@ -45,13 +47,13 @@ func TestAdd(t *testing.T) {
 	v1 := NewWithValues([]float64{0.0, 1.0, 2.0, 1.0})
 	v2 := NewWithValues([]float64{0.0, 1.0, 2.0, 1.0})
 	result := Add(v1, v2)
-	assert.Equal(result.Elements[0], 0.0)
-	assert.Equal(result.Elements[1], 2.0)
-	assert.Equal(result.Elements[2], 4.0)
-	assert.Equal(result.Elements[3], 2.0)
+	assert.Equal(result[0], 0.0)
+	assert.Equal(result[1], 2.0)
+	assert.Equal(result[2], 4.0)
+	assert.Equal(result[3], 2.0)
 
-	assert.Equal(v1.Elements[1], 1.0)
-	assert.Equal(v2.Elements[1], 1.0)
+	assert.Equal(v1[1], 1.0)
+	assert.Equal(v2[1], 1.0)
 }
 
 func TestSubtract(t *testing.T) {
@@ -59,13 +61,13 @@ func TestSubtract(t *testing.T) {
 	v1 := NewWithValues([]float64{0.0, 1.0, 2.0, 1.0})
 	v2 := NewWithValues([]float64{0.0, 1.0, 2.0, 1.0})
 	result := Subtract(v1, v2)
-	assert.Equal(result.Elements[0], 0.0)
-	assert.Equal(result.Elements[1], 0.0)
-	assert.Equal(result.Elements[2], 0.0)
-	assert.Equal(result.Elements[3], 0.0)
+	assert.Equal(result[0], 0.0)
+	assert.Equal(result[1], 0.0)
+	assert.Equal(result[2], 0.0)
+	assert.Equal(result[3], 0.0)
 
-	assert.Equal(v1.Elements[1], 1.0)
-	assert.Equal(v2.Elements[1], 1.0)
+	assert.Equal(v1[1], 1.0)
+	assert.Equal(v2[1], 1.0)
 }
 
 func TestDot(t *testing.T) {
@@ -83,17 +85,26 @@ func TestCross(t *testing.T) {
 	v2 := NewWithValues([]float64{0.0, 3.0, 4.0})
 	result, err := Cross(v1, v2)
 	assert.Nil(err)
-	assert.Equal(-2.0, result.Elements[0])
-	assert.Equal(0.0, result.Elements[1])
-	assert.Equal(0.0, result.Elements[2])
+	assert.Equal(-2.0, result[0])
+	assert.Equal(0.0, result[1])
+	assert.Equal(0.0, result[2])
 
-	assert.Equal(1.0, v1.Elements[1])
-	assert.Equal(3.0, v2.Elements[1])
+	assert.Equal(1.0, v1[1])
+	assert.Equal(3.0, v2[1])
 
 	v3 := NewWithValues([]float64{0.0, 1.0, 2.0, 1.0})
 	v4 := NewWithValues([]float64{0.0, 1.0, 2.0})
 	_, err = Cross(v3, v4)
 	assert.NotNil(err)
+}
+
+func TestUnit(t *testing.T) {
+	assert := assert.New(t)
+	v := NewWithValues([]float64{3.0, 4.0})
+	unit := Unit(v)
+	assert.InEpsilon(0.6, unit[0], EPSILON)
+	assert.InEpsilon(0.8, unit[1], EPSILON)
+	assert.Equal(1.0, unit.Magnitude())
 }
 
 func TestHadamard(t *testing.T) {
@@ -102,7 +113,7 @@ func TestHadamard(t *testing.T) {
 	v2 := NewWithValues([]float64{0.5, 3.0, 4.0})
 	result, err := Hadamard(v1, v2)
 	assert.Nil(err)
-	assert.Equal(0.5, result.Elements[0])
-	assert.Equal(3.0, result.Elements[1])
-	assert.Equal(8.0, result.Elements[2])
+	assert.Equal(0.5, result[0])
+	assert.Equal(3.0, result[1])
+	assert.Equal(8.0, result[2])
 }

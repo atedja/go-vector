@@ -1,6 +1,6 @@
 # Vector
 
-Simple N-dimensional Vector math library. Supports JSON/Text/Binary marshaling.
+Simple N-dimensional Vector math library.
 
 ### Quick Example
 
@@ -26,7 +26,7 @@ func main() {
 
 #### Creating Vectors
 
-    var v *vector.Vector
+    var v vector.Vector
     v = vector.New(3)
     v = vector.NewWithValues([]float64{0.0, 1.0, 2.0})
 
@@ -42,13 +42,8 @@ func main() {
     dot, _ := vector.Dot(v1, v2)
 
 In general, all functions under `vector` package are designed to always return a new result without modifying the vectors
-in the arguments.
+in the arguments, while functions under the `vector.Vector` type will modify the vector.
 
 #### And more!
 
 `Add`, `Subtract`, `Scale`, `Resize`, `Zero`, `Magnitude`, `Unit`, `Hadamard`
-
-#### Marshal and Unmarshal
-
-Vector implements `encoding.BinaryMarshaler`, `encoding.BinaryUnmarshaler`, `encoding.TextMarshaler`, `encoding.TextUnmarshaler`,
-and also `json.Marshaler` and `json.Unmarshaler` for all your marshaling needs. Text marshaling is using the CSV format.

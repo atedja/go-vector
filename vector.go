@@ -20,119 +20,54 @@ import (
 	"math"
 )
 
-type Vector struct {
-	Elements []float64
-}
+type Vector []float64
 
 // Clone this vector, returning a new Vector.
-func (self *Vector) Clone() *Vector {
-	return NewWithValues(self.Elements)
+func (self Vector) Clone() Vector {
+	return NewWithValues(self)
 }
 
 // Sets the values of this vector.
-func (self *Vector) Set(values []float64) {
-	copy(self.Elements, values)
-}
-
-// Adds this vector with another.
-func (self *Vector) Add(other *Vector) {
-	length := min(len(self.Elements), len(other.Elements))
-	for i := 0; i < length; i++ {
-		self.Elements[i] += other.Elements[i]
-	}
-}
-
-// Subtracts this vector with another.
-func (self *Vector) Subtract(other *Vector) {
-	length := min(len(self.Elements), len(other.Elements))
-	for i := 0; i < length; i++ {
-		self.Elements[i] -= other.Elements[i]
-	}
+func (self Vector) Set(values []float64) {
+	copy(self, values)
 }
 
 // Scale this vector (performs scalar multiplication) by the specified value.
-func (self *Vector) Scale(value float64) {
-	length := len(self.Elements)
+func (self Vector) Scale(value float64) {
+	length := len(self)
 	for i := 0; i < length; i++ {
-		self.Elements[i] *= value
+		self[i] *= value
 	}
-}
-
-// Performs dot product with another vector.
-func (self *Vector) Dot(other *Vector) (float64, error) {
-	if len(self.Elements) != len(other.Elements) {
-		return 0.0, ErrVectorNotSameSize
-	}
-
-	result := 0.0
-	for i, u := range self.Elements {
-		result += u * other.Elements[i]
-	}
-
-	return result, nil
-}
-
-// Performs cross product with another vector.
-// This overwrites this vector to contain the resulting vector. Use `vector.Cross` if a new vector is desired.
-// Vector dimensionality has to be 3.
-func (self *Vector) Cross(other *Vector) error {
-	if self.Dim() != 3 || other.Dim() != 3 {
-		return ErrVectorInvalidDimension
-	}
-
-	x := self.Elements[1]*other.Elements[2] - self.Elements[2]*other.Elements[1]
-	y := self.Elements[2]*other.Elements[0] - self.Elements[0]*other.Elements[2]
-	z := self.Elements[0]*other.Elements[1] - self.Elements[1]*other.Elements[0]
-
-	self.Elements[0] = x
-	self.Elements[1] = y
-	self.Elements[2] = z
-
-	return nil
-}
-
-// Resizes this vector to a new size, filling extra elements with 0.0,
-// or truncating them if new size is smaller.
-func (self *Vector) Resize(n int) {
-	newElements := make([]float64, n)
-	copy(newElements, self.Elements)
-	self.Elements = newElements
 }
 
 // Returns the magnitude of this vector.
-func (self *Vector) Magnitude() float64 {
+func (self Vector) Magnitude() float64 {
 	result := 0.0
-	for _, e := range self.Elements {
+	for _, e := range self {
 		result += e * e
 	}
 	return math.Sqrt(result)
 }
 
-// Returns the unit vector.
-func (self *Vector) Unit() *Vector {
-	magRec := 1.0 / self.Magnitude()
-	unit := self.Clone()
-	for i, _ := range unit.Elements {
-		unit.Elements[i] *= magRec
-	}
-	return unit
-}
-
-// Returns the dimensionality of this vector, i.e length
-func (self *Vector) Dim() int {
-	return len(self.Elements)
-}
-
 // Zeroes this vector
-func (self *Vector) Zero() {
-	for i, _ := range self.Elements {
-		self.Elements[i] = 0.0
+func (self Vector) Zero() {
+	for i, _ := range self {
+		self[i] = 0.0
 	}
 }
 
-// Iterates through the elements of this vector and applies a custom function
-func (self *Vector) ApplyFn(applyFn func(int, float64) float64) {
-	for i, e := range self.Elements {
-		self.Elements[i] = applyFn(i, e)
+// Iterates through the elements of this vector and for each element invokes
+// the function.
+func (self Vector) ApplyFn(applyFn func(float64) float64) {
+	for i, e := range self {
+		self[i] = applyFn(e)
+	}
+}
+
+// Iterates through the elements of this vector and for each element invokes
+// the function with index.
+func (self Vector) ApplyFnWithIndex(applyFn func(int, float64) float64) {
+	for i, e := range self {
+		self[i] = applyFn(i, e)
 	}
 }
