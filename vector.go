@@ -58,7 +58,7 @@ func (self Vector) Zero() {
 
 // Iterates through the elements of this vector and for each element invokes
 // the function.
-func (self Vector) ApplyFn(applyFn func(float64) float64) {
+func (self Vector) Do(applyFn func(float64) float64) {
 	for i, e := range self {
 		self[i] = applyFn(e)
 	}
@@ -66,7 +66,7 @@ func (self Vector) ApplyFn(applyFn func(float64) float64) {
 
 // Iterates through the elements of this vector and for each element invokes
 // the function with index.
-func (self Vector) ApplyFnWithIndex(applyFn func(int, float64) float64) {
+func (self Vector) DoWithIndex(applyFn func(int, float64) float64) {
 	for i, e := range self {
 		self[i] = applyFn(i, e)
 	}

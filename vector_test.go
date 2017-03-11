@@ -77,10 +77,10 @@ func TestVectorZero(t *testing.T) {
 	assert.Equal(0.0, v[3])
 }
 
-func TestApplyFn(t *testing.T) {
+func TestDo(t *testing.T) {
 	assert := assert.New(t)
 	v := NewWithValues([]float64{0.0, 1.0, 2.0, 1.0})
-	v.ApplyFnWithIndex(func(i int, e float64) float64 {
+	v.DoWithIndex(func(i int, e float64) float64 {
 		return e * 3.0
 	})
 	assert.Equal(0.0, v[0])
@@ -88,7 +88,7 @@ func TestApplyFn(t *testing.T) {
 	assert.Equal(6.0, v[2])
 	assert.Equal(3.0, v[3])
 
-	v.ApplyFn(func(e float64) float64 {
+	v.Do(func(e float64) float64 {
 		return e * 2.0
 	})
 	assert.Equal(0.0, v[0])
