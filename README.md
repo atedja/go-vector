@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/atedja/go-vector.svg?branch=master)](https://travis-ci.org/atedja/go-vector)
 
-Simple N-dimensional Vector math library.
+Simple N-dimensional Vector math library. Uses standard `[]float64` type.
 
 ### Quick Example
 
